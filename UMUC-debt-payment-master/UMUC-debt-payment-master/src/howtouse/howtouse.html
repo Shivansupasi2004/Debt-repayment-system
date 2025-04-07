@@ -1,0 +1,79 @@
+<div class="page-header">
+	<h2>Debt Repayment Calculator How-To</h2>
+</div>
+
+<h3>Accounts</h3>
+
+<p>
+	On the Accounts page, you can add, edit, and delete accounts which represent your debts. For each account, you must fill out the following information:
+</p>
+
+<dl>
+	<dt>Account Name</dt>
+	<dd> - Enter the name of the new account.  Text 30 characters</dd>
+
+	<dt>APR</dt>
+	<dd> - Enter the annual percentage rate of the account.  Maximum of 5 characters.  Valid input includes 0.00 through 100.00</dd>
+
+	<dt>Current Balance</dt>
+	<dd> - Enter the current balance that is owed on this account.  Text 10 characters.  E.g., 3000 </dd>
+
+	<dt>Monthly Payment</dt>
+	<dd> - Enter the amount paid to account each month.  Text 10 characters.  E.g., 500</dd>
+</dl>
+
+<h3>Reports</h3>
+
+<p>
+	On the Reports page, you can specify the amount of additional money you would like to put towards debt repayment 
+	as well as select the repayment algorithm you would like to apply to your debt load.
+</p>
+
+<p>
+	The following controls are available to customize your report to provide different repayment scenarios:
+</p>
+	
+<dl>	
+	<dt>Extra Payment</dt>
+	<dd> - Enter the total amount to be applied above the accounts' minimum payments. The algorithm selected will apply the extra to the correct account </dd>
+
+	<dt>Algorithm</dt>
+	<dd> - Select whether you wish to repay accounts based on their interest, their balance, or a weighted combination of the two </dd>
+
+	<dt>Generate Report</dt>
+	<dd> - This button will commit any information above and generate the report </dd>
+</dl>
+
+
+
+<p>
+	No information will be displayed until you press the Generate Report button.  If the button is pressed with the 
+	defaults selected, no additional money will be applied towards repayment, and the report will show the Highest 
+	APR First algorithm.  To show anything further, type the amount of money to be paid over the minimum payments, 
+	if any, into the Extra Payment field, select the preferred algorithm from the dropdown Algorithm menu, and then 
+	press Generate Report.
+</p>
+
+<h3>About</h3>
+
+<p>
+	This page provides information about the project as well as allowing the user to contact its creators by clicking 
+	on their name.
+</p>
+
+<h3>How to Use</h3>
+
+<!-- 16:9 aspect ratio --
+<div class="embed-responsive embed-responsive-16by9">
+	<iframe class="embed-responsive-item" src="Instructions" ></iframe>
+</div> -->
+
+<div id="pdf">
+	<object data="Instructions.pdf" 
+		type="application/pdf"
+		width="100%"
+		height=700>
+		<p> It appears you don't have a PDF plugin for this browser. No biggie... you can <a href="myfile.pdf">click here to download the PDF file.</a>
+		</p>
+	</object>
+</div>

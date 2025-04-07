@@ -1,0 +1,164 @@
+<!-- 
+	account-list.html
+	Purpose: Lists all the accounts currently in the system
+-->
+
+
+<div class="page-header">
+	<h2>Your Accounts</h2>
+</div>
+<br>
+<p class="text-muted">
+	Enter all of your current installment account information in the table below in order to run your calculations.  When you're ready to see a detailed breakdown of yor debt repayment, visit the <a href="#/reports">reports page</a>.
+</p>
+
+
+<div class="row">
+	<div class="col-xs-8"> 
+		<div class="panel panel-default">
+	  		<div class="panel-heading">
+	    		<h3 class="panel-title">
+	    			Accounts
+	    			<button class="btn btn-danger btn-xs pull-right" ng-click="clear()" id="remove-all-accounts">
+	    				<i class="glyphicon glyphicon-trash"></i> Remove All Accounts
+	    			</button>
+
+	    			<button class="btn btn-primary btn-xs pull-right" ng-click="addAccount()">
+	    				<i class="glyphicon glyphicon-plus"></i> Add Account
+	    			</button>
+	    		</h3>
+	  		</div>
+	  		<div class="panel-body">
+	  		
+	  		<form name="input_form" novalidate class="css-form">
+	    		<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th width="150">APR</th>
+							<th class="nowrap" width="175">Current Balance</th>
+							<th class="nowrap" width="175">Monthly Payment</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<!-- Iterate through the accounts in the system and display their information -->
+						<tr ng-repeat="account in accounts" ng-init="editing=!account.name.length" ng-form="account_form">
+							
+								<td class="nowrap">
+									<!-- Account label -->
+									<span ng-show="!editing">{{ account.name }}</span>
+									<!-- Account edit control -->
+									<div
+										class 		= "input-group input-group-sm"
+										ng-show 	= "editing"
+										ng-class 	= "{ 'has-error' : account_form.accountName.$invalid }">
+
+										<input
+											type				 = "text"
+											class				 = "form-control"
+											ng-model		 = "account.name"
+											placeholder	 = "Account Name"
+											name				 = "accountName"
+											ng-required  = "true"
+											ng-minlength = "1">
+											
+									</div>
+								</td>
+								<td>
+									<!-- APR label -->
+									<span ng-show="!editing">{{ account.APR }}%</span>
+									<!-- APR Control -->
+									<div 
+										class 		="input-group input-group-sm" 
+										ng-show 	="editing"
+										ng-class 	= "{ 'has-error' : account_form.apr.$invalid }">
+										
+										<input 
+											type 						 	= "number" 
+											name 						 	= "apr" 
+											class 					 	= "form-control" 
+											ng-model 					= "account.APR" 
+											placeholder 			= "APR" 
+											aria-describedby 	= "apr-addon" 
+											min 							= "0"
+											max 							= "100"
+											ng-required				= "true">
+											
+										<span class="input-group-addon" id="apr-addon">%</span>
+
+									</div>
+								</td>
+								<td class="snug">
+									<!-- Balance label -->
+									<span ng-show="!editing">{{ account.balance | currency }}</span>
+									<!-- Balance control -->
+									<div 
+										class 		= "input-group input-group-sm" 
+										ng-class 	= "{ 'has-error' : account_form.balance.$invalid }" 
+										ng-show 	= "editing">
+										
+										<span 
+											class = "input-group-addon" 
+											id 		= "balance-addon">$</span>
+
+										<input 
+											type 							= "number"
+											name 							= "balance"
+											class 						= "form-control"
+											ng-model 					= "account.balance"
+											placeholder 			= "Balance"
+											min 							= "0"
+											max 							= "999999999"
+											aria-describedby	= "balance-addon"
+											ng-minlength			= "1"
+											ng-required				= "true">
+									</div>
+								</td>
+								<td class="snug">
+									<!-- Payment label -->
+									<span ng-show="!editing">{{ account.payment | currency }}</span>
+									<!-- Payment control -->
+									<div 
+										class 		= "input-group input-group-sm"
+										ng-class 	= "{ 'has-error' : account_form.payment.$invalid }"
+										ng-show 	= "editing">
+
+										<span class="input-group-addon" id="payment-addon">$</span>
+										
+										<input
+											type							= "number"
+											name							= "payment"
+											class							= "form-control"
+											min 							= "0"
+											max 							= "999999"
+											ng-model					= "account.payment"
+											placeholder				= "Min.Payment"
+											aria-describedby	= "payment-addon"
+											ng-required 			= "true">
+									</div>
+								</td>
+
+								<td class="snug account-actions">
+									<!-- Edit -->
+									<i class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" 
+										title="Edit this account" ng-click="editing=true" ng-show="!editing"></i>
+									<!-- Save -->
+									<i class="glyphicon glyphicon-ok-sign" ng-click="editing=false;updateTotals()" 
+										title="Save this account" ng-show="editing && account_form.$valid"></i>
+									<!-- Delete -->
+									<i class="glyphicon glyphicon-trash" ng-click="deleteAccount( account )" 
+										title="Delete this account"></i>
+								</td>
+						<tr> 
+					</tbody>
+				</table>
+			</form>
+  	</div>
+	</div>
+</div>
+<div class="col-xs-4" ng-include="'account/account-list/account-summary.html'"></div>
+</div>
+<p class="text-danger">
+	<strong>Caution: </strong>The Debt Repayment Calculator does not store your information in any way to keep your information safe, but this means you will lose your data if you navigate away from this page.
+</p>
